@@ -1,0 +1,38 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "opportunities": {
+            "title": "Opportunities",
+            "transformation": {
+                "fields": [
+                    "type",
+                    "title",
+                    "solicitationNumber",
+                    "agency",
+                    "postedDate",
+                    "responseDeadline",
+                    "naicsCode",
+                    "setAside",
+                    "active",
+                    "uiLink"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "type": { "label": "Type", "format": "text" },
+                    "title": { "label": "Title", "format": "text" },
+                    "solicitationNumber": { "label": "Sol #", "format": "text" },
+                    "agency": { "label": "Agency", "format": "text" },
+                    "postedDate": { "label": "Posted", "format": "text" },
+                    "responseDeadline": { "label": "Deadline", "format": "text" },
+                    "naicsCode": { "label": "NAICS", "format": "text" },
+                    "setAside": { "label": "Set-Aside", "format": "text" },
+                    "active": { "label": "Active", "format": "text" },
+                    "uiLink": { "label": "SAM.gov Link", "format": "link" }
+                }
+            }
+        }
+    }
+}

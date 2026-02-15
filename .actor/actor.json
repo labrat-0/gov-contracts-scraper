@@ -1,0 +1,13 @@
+{
+    "actorSpecification": 1,
+    "name": "gov-contracts-scraper",
+    "title": "Government Contracts Scraper",
+    "version": "1.0.0",
+    "buildTag": "latest",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "./Dockerfile"
+}

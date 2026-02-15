@@ -1,0 +1,165 @@
+{
+    "title": "Government Contracts Scraper Input",
+    "description": "Search federal contract opportunities and awards from SAM.gov. Requires a free SAM.gov public API key.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apiKey": {
+            "sectionCaption": "API Key",
+            "sectionDescription": "A free SAM.gov public API key is required. Register at https://sam.gov and get your key from Account Details > Public API Key.",
+            "title": "SAM.gov API Key",
+            "type": "string",
+            "description": "Your SAM.gov public API key. Get one free at https://sam.gov (Account Details page).",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "mode": {
+            "sectionCaption": "Scraping Mode",
+            "sectionDescription": "Choose what type of data to search for.",
+            "title": "Scraping mode",
+            "type": "string",
+            "description": "What type of government contract data to search for.",
+            "editor": "select",
+            "enum": ["search_opportunities", "search_awards", "entity_lookup"],
+            "enumTitles": [
+                "Search Opportunities (Solicitations, Pre-solicitations, etc.)",
+                "Search Awards (Contract Awards)",
+                "Entity Lookup (Federal Organizations)"
+            ],
+            "default": "search_opportunities"
+        },
+        "keyword": {
+            "sectionCaption": "Search Filters",
+            "sectionDescription": "Filter opportunities and awards by keyword, NAICS code, agency, set-aside type, and more.",
+            "title": "Keyword",
+            "type": "string",
+            "description": "Search keyword to find in opportunity titles and descriptions.",
+            "editor": "textfield",
+            "prefill": "cybersecurity"
+        },
+        "solicitationNumber": {
+            "title": "Solicitation number",
+            "type": "string",
+            "description": "Search by a specific solicitation number.",
+            "editor": "textfield"
+        },
+        "procurementType": {
+            "title": "Procurement type",
+            "type": "string",
+            "description": "Filter by procurement type. Leave empty for all types.",
+            "editor": "select",
+            "enum": ["", "o", "p", "k", "r", "a", "s", "g", "u", "i"],
+            "enumTitles": [
+                "All Types",
+                "Solicitation",
+                "Pre-solicitation",
+                "Combined Synopsis/Solicitation",
+                "Sources Sought",
+                "Award Notice",
+                "Special Notice",
+                "Sale of Surplus",
+                "Justification",
+                "Intent to Bundle"
+            ],
+            "default": ""
+        },
+        "naicsCode": {
+            "title": "NAICS code",
+            "type": "string",
+            "description": "Filter by NAICS code (up to 6 digits). Example: 541512 (Computer Systems Design Services).",
+            "editor": "textfield"
+        },
+        "classificationCode": {
+            "title": "Classification / PSC code",
+            "type": "string",
+            "description": "Filter by Product Service Code (PSC). Example: 7030 (ADP Software).",
+            "editor": "textfield"
+        },
+        "setAside": {
+            "title": "Set-aside type",
+            "type": "string",
+            "description": "Filter by small business set-aside type.",
+            "editor": "select",
+            "enum": ["", "SBA", "8A", "8AN", "HZC", "HZS", "SDVOSBC", "SDVOSBS", "WOSB", "WOSBSS", "EDWOSB", "EDWOSBSS", "VSA", "VSS"],
+            "enumTitles": [
+                "All",
+                "Small Business Set-Aside",
+                "8(a) Set-Aside",
+                "8(a) Sole Source",
+                "HUBZone Set-Aside",
+                "HUBZone Sole Source",
+                "Service-Disabled Veteran-Owned SB Set-Aside",
+                "Service-Disabled Veteran-Owned SB Sole Source",
+                "Women-Owned SB Set-Aside",
+                "Women-Owned SB Sole Source",
+                "Economically Disadvantaged WOSB Set-Aside",
+                "Economically Disadvantaged WOSB Sole Source",
+                "Veteran-Owned SB Set-Aside",
+                "Veteran-Owned SB Sole Source"
+            ],
+            "default": ""
+        },
+        "state": {
+            "title": "Place of performance (state)",
+            "type": "string",
+            "description": "Filter by state where work will be performed. Use 2-letter state code (e.g. VA, CA, TX).",
+            "editor": "textfield"
+        },
+        "zip": {
+            "title": "Place of performance (ZIP)",
+            "type": "string",
+            "description": "Filter by ZIP code where work will be performed.",
+            "editor": "textfield"
+        },
+        "organizationCode": {
+            "title": "Agency / Organization code",
+            "type": "string",
+            "description": "Filter by federal organization code. Use Entity Lookup mode to find codes.",
+            "editor": "textfield"
+        },
+        "postedFrom": {
+            "title": "Posted from date",
+            "type": "string",
+            "description": "Start date for posting range (MM/dd/yyyy). Defaults to 30 days ago.",
+            "editor": "textfield"
+        },
+        "postedTo": {
+            "title": "Posted to date",
+            "type": "string",
+            "description": "End date for posting range (MM/dd/yyyy). Defaults to today.",
+            "editor": "textfield"
+        },
+        "responseDeadlineFrom": {
+            "title": "Response deadline from",
+            "type": "string",
+            "description": "Filter opportunities with response deadlines starting from this date (MM/dd/yyyy).",
+            "editor": "textfield"
+        },
+        "responseDeadlineTo": {
+            "title": "Response deadline to",
+            "type": "string",
+            "description": "Filter opportunities with response deadlines up to this date (MM/dd/yyyy).",
+            "editor": "textfield"
+        },
+        "organizationName": {
+            "sectionCaption": "Entity Lookup",
+            "sectionDescription": "Look up federal organizations. Used when mode is 'Entity Lookup'.",
+            "title": "Organization name",
+            "type": "string",
+            "description": "Search for federal organizations by name (e.g. 'Department of Defense').",
+            "editor": "textfield",
+            "prefill": "Department of Defense"
+        },
+        "maxResults": {
+            "sectionCaption": "Scraper Settings",
+            "sectionDescription": "Control output limits.",
+            "title": "Max results",
+            "type": "integer",
+            "description": "Maximum number of results to return. Free users are limited to 25 results per run.",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 10000
+        }
+    },
+    "required": ["apiKey", "mode"]
+}
