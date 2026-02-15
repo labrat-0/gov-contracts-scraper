@@ -1,10 +1,10 @@
 # Government Contracts Scraper
 
-Search federal contract opportunities, awards, and agencies from SAM.gov -- structured, filterable, and ready for analysis.
+Search federal contract opportunities, awards, and agencies from SAM.gov -- structured, filterable, and ready for analysis. MCP-ready for AI agent integration.
 
 ## What does it do?
 
-Government Contracts Scraper pulls structured data from the SAM.gov public API, the official source for all U.S. federal contracting opportunities. You provide a free SAM.gov API key and search filters, and it returns clean, structured contract data.
+Government Contracts Scraper pulls structured data from the SAM.gov public API, the official source for all U.S. federal contracting opportunities. You provide a free SAM.gov API key and search filters, and it returns clean, structured contract data. Returns consistent JSON -- ready for analysis, GovTech pipelines, or consumption by AI agents via MCP.
 
 **Use cases:**
 
@@ -13,6 +13,7 @@ Government Contracts Scraper pulls structured data from the SAM.gov public API, 
 - **Market research** -- analyze federal spending patterns by agency, industry code, or region
 - **Business development** -- identify upcoming opportunities before competitors
 - **Policy research** -- study procurement trends, small business set-asides, and agency spending
+- **AI agent tooling** -- expose as an MCP tool so AI agents can search federal contracts, track awards, and monitor procurement activity in real time
 
 ## Features
 
@@ -344,6 +345,34 @@ Award notices may not include all fields that solicitations have (like response 
 ### Can I use this with the Apify API?
 
 Yes. Call the actor via the Apify API and retrieve results programmatically in JSON, CSV, or other formats. Works with the Apify Python and JavaScript clients.
+
+---
+
+## MCP Integration
+
+This actor works as an MCP tool through Apify's hosted MCP server. No custom server needed.
+
+- **Endpoint:** `https://mcp.apify.com?tools=labrat011/gov-contracts-scraper`
+- **Auth:** `Authorization: Bearer <APIFY_TOKEN>`
+- **Transport:** Streamable HTTP
+- **Works with:** Claude Desktop, Cursor, VS Code, Windsurf, Warp, Gemini CLI
+
+**Example MCP config (Claude Desktop / Cursor):**
+
+```json
+{
+    "mcpServers": {
+        "gov-contracts-scraper": {
+            "url": "https://mcp.apify.com?tools=labrat011/gov-contracts-scraper",
+            "headers": {
+                "Authorization": "Bearer <APIFY_TOKEN>"
+            }
+        }
+    }
+}
+```
+
+AI agents can use this actor to search federal contract opportunities, track award notices, look up agencies, and monitor procurement activity -- all as a callable MCP tool.
 
 ---
 
