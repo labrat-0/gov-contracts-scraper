@@ -88,7 +88,33 @@ async def main() -> None:
 
             except Exception as e:
                 state["failed"] += 1
-                Actor.log.error(f"Scraping error: {e}")
+                error_msg = str(e).lower()
+                
+                # Provide specific guidance based on error type
+                if "401" in error_msg or "unauthorized" in error_msg:
+                    Actor.log.error(
+                        "SAM.gov API returned 401 Unauthorized. "
+                        "Your API key may be invalid or expired. "
+                        "Get a new key at https://sam.gov (Account Details > Public API Key)."
+                    )
+                elif "403" in error_msg or "forbidden" in error_msg:
+                    Actor.log.error(
+                        "SAM.gov API returned 403 Forbidden. "
+                        "Your API key may not have access to this endpoint."
+                    )
+                elif "429" in error_msg or "rate" in error_msg:
+                    Actor.log.error(
+                        "SAM.gov API rate limit exceeded. "
+                        "Wait a few minutes before retrying."
+                    )
+                elif "api_key" in error_msg or "apikey" in error_msg:
+                    Actor.log.error(
+                        "SAM.gov API key is missing or invalid. "
+                        "Get a free key at https://sam.gov (Account Details > Public API Key)."
+                    )
+                else:
+                    Actor.log.error(f"Scraping error: {e}")
+                
                 # Push whatever we have so far
                 if batch:
                     await Actor.push_data(batch)
