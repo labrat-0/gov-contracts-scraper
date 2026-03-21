@@ -33,3 +33,6 @@ Thumbs.db
 
 # GSD planning artifacts
 .planning/
+
+# Arc knowledge files (local only)
+.arc/

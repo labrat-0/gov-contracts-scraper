@@ -87,6 +87,123 @@ You need a free SAM.gov public API key:
 
 ---
 
+## 👥 Who Uses This
+
+### 🏢 GovCon Business Development Teams
+
+BD teams at small and mid-sized contractors live on SAM.gov. The problem is that monitoring it manually — checking daily, filtering by your NAICS codes and set-asides, tracking response deadlines — is tedious and error-prone. This actor automates that pipeline.
+
+- Pull all new solicitations in your NAICS code posted in the last 7 days, filtered to your target state
+- Monitor specific agencies by `organizationCode` to catch releases the moment they post
+- Filter to your set-aside category (SBA, 8(a), SDVOSB) to see only opps your business qualifies for
+- Feed results into a CRM or BD tracker automatically via the Apify API
+
+```json
+{
+    "apiKey": "YOUR_SAM_GOV_API_KEY",
+    "mode": "search_opportunities",
+    "naicsCode": "541512",
+    "setAside": "SBA",
+    "state": "VA",
+    "postedFrom": "03/14/2026",
+    "postedTo": "03/21/2026",
+    "maxResults": 200
+}
+```
+
+### 📋 Proposal & Capture Managers
+
+Before you write a proposal, you need to know who you're competing against and what the government has paid for similar work. Award notices tell you exactly that.
+
+- Research who won past awards on similar contracts — awardee name, UEI, award amount
+- Identify which agencies are actively awarding in your space and what they paid
+- Find the contracting officers and POC emails to make warm calls before the next solicitation
+- Track a specific contract vehicle or solicitation number through its lifecycle
+
+```json
+{
+    "apiKey": "YOUR_SAM_GOV_API_KEY",
+    "mode": "search_awards",
+    "keyword": "cloud infrastructure",
+    "naicsCode": "541519",
+    "postedFrom": "01/01/2025",
+    "postedTo": "03/21/2026",
+    "maxResults": 500
+}
+```
+
+### 🏷️ Small Business Set-Aside Seekers
+
+If your business has an 8(a) certification, SDVOSB status, or HUBZone designation, set-aside contracts are your competitive advantage. Finding them shouldn't require constant manual SAM.gov sessions.
+
+- Filter exclusively to your set-aside category so every result is an opp you qualify for
+- Stack filters: set-aside + NAICS + state to get a highly targeted shortlist
+- Monitor response deadlines to build a prioritized action queue
+- Compare award amounts across similar set-aside contracts to calibrate your pricing
+
+```json
+{
+    "apiKey": "YOUR_SAM_GOV_API_KEY",
+    "mode": "search_opportunities",
+    "setAside": "SDVOSBC",
+    "naicsCode": "541611",
+    "maxResults": 300
+}
+```
+
+### 🔍 GovCon Consultants & BD Advisors
+
+Consultants tracking pipelines for multiple clients need to run different searches for each client's NAICS codes, certifications, and target agencies — and do it consistently. One actor call per client, scheduled via the Apify API.
+
+- Run per-client searches by NAICS + set-aside combination and export results separately
+- Use Entity Lookup mode to find the correct agency `organizationCode` for targeted searches
+- Track award activity in a client's vertical to benchmark win rates and pricing
+- Pull sources sought notices early — the best capture happens before a solicitation drops
+
+```json
+{
+    "apiKey": "YOUR_SAM_GOV_API_KEY",
+    "mode": "entity_lookup",
+    "organizationName": "Air Force",
+    "maxResults": 50
+}
+```
+
+### 📊 Market Researchers & Policy Analysts
+
+Federal procurement data is one of the richest public datasets for understanding government spending priorities, regional economic activity, and small business policy outcomes.
+
+- Analyze award volumes by agency and NAICS code to map where federal IT, services, or construction spending is concentrated
+- Track small business set-aside usage across agencies to study policy compliance
+- Study procurement type distribution (solicitations vs. sole-source justifications) in a specific industry
+- Monitor multi-year spending trends by filtering date ranges and aggregating award amounts
+
+```json
+{
+    "apiKey": "YOUR_SAM_GOV_API_KEY",
+    "mode": "search_awards",
+    "naicsCode": "336411",
+    "postedFrom": "01/01/2024",
+    "postedTo": "03/21/2026",
+    "maxResults": 1000
+}
+```
+
+---
+
+## 🔗 Related Actors
+
+Other actors from the same portfolio that complement federal procurement research:
+
+| Actor | What It Does |
+|---|---|
+| [Clinical Trial Site Contact Finder](https://apify.com/labrat011/clinical-trial-site-contact-finder) | Find PI contacts from ClinicalTrials.gov — useful for health agency contracts |
+| [NPI Provider Contact Finder](https://apify.com/labrat011/npi-provider-contact-finder) | Healthcare provider contacts from NPPES — pairs with VA and HHS contract research |
+| [SEC EDGAR Scraper](https://apify.com/labrat011/sec-edgar-scraper) | Financial filings for researching awardee companies before teaming or bidding |
+| [PubMed Scraper](https://apify.com/labrat011/pubmed-scraper) | Biomedical literature — useful alongside NIH and DoD health research contracts |
+
+---
+
 ## Input
 
 Choose a scraping mode and provide your SAM.gov API key along with any search filters.
