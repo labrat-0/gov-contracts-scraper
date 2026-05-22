@@ -35,7 +35,6 @@ Thumbs.db
 .planning/
 
 # Arc knowledge files (local only)
-.arc/
 
 # Deployment strategy (private — stored in _apify_intel/deployment/ only)
 DEPLOYMENT_INFO.md
